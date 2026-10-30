@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JewelAura | Virtual Jewellery Try-On</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- MediaPipe libraries for live face/hand tracking -->
+</head>
+
+<body>
+<header class="topbar">
+  <div class="brand">Jewel<span>Aura</span></div>
+  <nav>
+    <a href="#catalog">Jewellery</a>
+    <a href="#tryon">Virtual Try-On</a>
+    <a href="#how">How It Works</a>
+  </nav>
+  <button class="camera-nav" onclick="scrollToTryOn()">📷 Try On</button>
+</header>
+
+<section class="hero">
+  <div>
+    <p class="eyebrow">SMART VIRTUAL JEWELLERY TRY-ON</p>
+    <h1>See how your jewellery looks <span>before you buy.</span></h1>
+    <p class="hero-text">Browse 100 jewellery designs and try them live using your camera, just like a social-media filter.</p>
+    <button class="primary" onclick="scrollToTryOn()">Start Virtual Try-On →</button>
+  </div>
+  <div class="hero-card">
+    <div class="hero-ring">✦</div>
+    <h3>100 Designs</h3>
+    <p>20 Chains · 20 Earrings · 20 Nose Pins · 20 Bangles · 20 Head Chains</p>
+  </div>
+</section>
+
+<section id="catalog" class="catalog-section">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">JEWELLERY COLLECTION</p>
+      <h2>Find your favourite</h2>
+    </div>
+    <div class="search-box">
+      🔍 <input id="searchInput" type="text" placeholder="Search jewellery..." oninput="renderProducts()">
+    </div>
+  </div>
+
+  <div class="chips">
+    <button class="chip active" data-cat="all" onclick="setCategory('all', this)">All <b>100</b></button>
+    <button class="chip" data-cat="chain" onclick="setCategory('chain', this)">Neck Chains <b>20</b></button>
+    <button class="chip" data-cat="earring" onclick="setCategory('earring', this)">Earrings <b>20</b></button>
+    <button class="chip" data-cat="nosepin" onclick="setCategory('nosepin', this)">Nose Pins <b>20</b></button>
+    <button class="chip" data-cat="bangle" onclick="setCategory('bangle', this)">Bangles <b>20</b></button>
+    <button class="chip" data-cat="headchain" onclick="setCategory('headchain', this)">Head Chains <b>20</b></button>
+  </div>
+
+  <div id="productGrid" class="product-grid"></div>
+</section>
+
+<section id="tryon" class="tryon-section">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">LIVE CAMERA</p>
+      <h2>Virtual Try-On Studio</h2>
+      <p class="muted">Allow access to your laptop webcam. The phone/virtual camera is intentionally not used.</p>
+    </div>
+  </div>
+
+  <div class="studio">
+    <div class="camera-panel">
+      <div class="camera-wrap">
+        <video id="video" autoplay playsinline muted></video>
+        <canvas id="cameraFeed"></canvas>
+        <canvas id="overlay"></canvas>
+        <div id="cameraMessage" class="camera-message">
+          <div class="camera-icon">📷</div>
+          <h3>Camera is ready</h3>
+          <p>Click Start Camera to begin your virtual try-on.</p>
+          <button class="primary" onclick="startCamera()">Start Camera</button>
+        </div>
+        <div class="live-pill">● LIVE</div>
+      </div>
+      <div class="camera-controls">
+        <select id="cameraSelect" class="camera-select" onchange="changeCamera()">
+          <option value="">Laptop webcam only</option>
+        </select>
+        <button class="primary" onclick="startCamera()">▶ Start Camera</button>
+        <button class="secondary" onclick="capturePhoto()">📸 Capture</button>
+        <button class="secondary" onclick="clearTryOn()">✕ Remove</button>
+      </div>
+    </div>
+
+    <aside class="selection-panel">
+      <p class="eyebrow">SELECTED DESIGN</p>
+      <div id="selectedPreview" class="selected-preview">
+        <div class="preview-symbol">💎</div>
+        <h3>No jewellery selected</h3>
+        <p>Choose a design from the collection.</p>
+      </div>
+      <div class="tip-box">
+        <b>💡 Tip</b>
+        <p>For the best result, keep your face visible and use good lighting. Bangles use hand tracking.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section id="how" class="how-section">
+  <p class="eyebrow">HOW IT WORKS</p>
+  <h2>Three simple steps</h2>
+  <div class="steps">
+    <div><span>01</span><h3>Browse</h3><p>Search through 100 jewellery designs.</p></div>
+    <div><span>02</span><h3>Select</h3><p>Choose the jewellery you want to try.</p></div>
+    <div><span>03</span><h3>Try Live</h3><p>Camera tracking places it on your face or hand.</p></div>
+  </div>
+</section>
+
+<div id="toast" class="toast"></div>
+<footer>JewelAura · Virtual Jewellery Try-On Prototype</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
